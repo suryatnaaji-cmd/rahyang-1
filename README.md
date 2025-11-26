@@ -1,60 +1,57 @@
-import React, { useState } from 'react';
-import TTSGenerator from './components/TTSGenerator';
-import ImageGenerator from './components/ImageGenerator';
-import VeoPromptCrafter from './components/VeoPromptCrafter';
-import GoogleFlowPanel from './components/GoogleFlowPanel';
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rahyang Images Generator V4.6</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      @keyframes pulse-slow {
+        0%, 100% { opacity: 0.5; }
+        50% { opacity: 1; }
+      }
+      .animate-pulse-slow {
+        animation: pulse-slow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+      }
+      
+      /* Custom Scrollbar for nicer UI */
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #f1f1f1; 
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #d1d5db; 
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #9ca3af; 
+      }
 
-type Page = 'ttsGenerator' | 'imageGenerator' | 'veoCrafter' | 'googleFlow';
-
-const App: React.FC = () => {
-    const [page, setPage] = useState<Page>('ttsGenerator');
-
-    const NavButton: React.FC<{ targetPage: Page; children: React.ReactNode }> = ({ targetPage, children }) => (
-        <button
-            onClick={() => setPage(targetPage)}
-            className={`py-2 px-4 rounded-lg text-sm sm:text-base font-semibold transition duration-300
-                ${page === targetPage
-                    ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-700/30'
-                    : 'bg-gray-200/80 text-gray-600 hover:bg-gray-300'
-                }`}
-        >
-            {children}
-        </button>
-    );
-
-    return (
-        <div className="min-h-screen bg-white text-gray-900 font-sans p-4 sm:p-8">
-            <header className="text-center mb-10 pb-4 border-b-2 border-transparent relative">
-                <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-emerald-600 to-purple-600 transition duration-500">
-                    RAHYANG IMAGES GENERATOR V4.6
-                </h1>
-                <p className="mt-2 text-xl text-gray-600">
-                    Ngonten Jadi Mudah: Gabungkan Produk, Model, dan Konsep Foto dalam Sekali Klik
-                </p>
-                <div className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-emerald-500 to-transparent animate-pulse-slow"></div>
-            </header>
-
-            <nav className="flex justify-center flex-wrap gap-2 sm:gap-4 mb-6 sm:mb-8 pb-4 border-b border-gray-200">
-                <NavButton targetPage="ttsGenerator">Text To Voice</NavButton>
-                <NavButton targetPage="imageGenerator">Images Generator</NavButton>
-                <NavButton targetPage="veoCrafter">Veo 3 Prompt Crafter</NavButton>
-                <NavButton targetPage="googleFlow">Google Labs Flow</NavButton>
-            </nav>
-
-            <div style={{ display: page === 'ttsGenerator' ? 'block' : 'none' }}>
-                <TTSGenerator />
-            </div>
-            <div style={{ display: page === 'imageGenerator' ? 'block' : 'none' }}>
-                <ImageGenerator />
-            </div>
-            <div style={{ display: page === 'veoCrafter' ? 'block' : 'none' }}>
-                <VeoPromptCrafter />
-            </div>
-            <div style={{ display: page === 'googleFlow' ? 'block' : 'none' }}>
-                <GoogleFlowPanel />
-            </div>
-        </div>
-    );
-};
-
-export default App;
+      /* Image Overlay Transition */
+      .image-overlay {
+          opacity: 0;
+          transition: opacity 0.3s ease-in-out;
+      }
+      .image-container:hover .image-overlay {
+          opacity: 1;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.555.0",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.30.0",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0"
+  }
+}
+</script>
+</head>
+  <body class="bg-gray-50 text-gray-900 font-sans">
+    <div id="root"></div>
+  </body>
+</html>
